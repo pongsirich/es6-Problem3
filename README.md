@@ -26,18 +26,22 @@ $ json-server db.json
 ```javascript
 searchInput.addEventListener('input', function (e) {
   const kw = this.value
-  products = copyProducts.filter(product => {
-    return product.title.toLowerCase().includes(kw.trim().toLowerCase())
-  })
+  alert(kw)
   renderProduct()
 })
 
-const initializeApplication = async () => {
-  const { data } = await axios.get('http://localhost:3000/products')
-  products = data
-  copyProducts = products
-  renderProduct()
+const initializeApplication = function () {
+  axios
+    .get('http://localhost:3000/products')
+    .then(function (response) {
+      products = response.data
+      renderProduct()
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }
+
 
 ```
 
